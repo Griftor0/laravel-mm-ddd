@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Core\Infrastructure\Providers;
+namespace App\Core\Infrastructure;
 
 use Illuminate\Support\Carbon;
 use Illuminate\Support\ServiceProvider;
@@ -16,7 +16,7 @@ final class AppServiceProvider extends ServiceProvider
         Carbon::setLocale($locale);
 
         $this->loadMigrationsFrom(
-            base_path('app/Core/Infrastructure/Database/Migrations')
+            base_path('app/Core/Infrastructure/Migrations')
         );
     }
 }
