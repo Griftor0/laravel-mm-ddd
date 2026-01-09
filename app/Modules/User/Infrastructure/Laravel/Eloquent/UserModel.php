@@ -1,9 +1,8 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\User\Infrastructure\Eloquent;
+namespace App\Modules\User\Infrastructure\Laravel\Eloquent;
 
-use App\Modules\User\Infrastructure\Eloquent\Casts\PasswordCast;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
@@ -13,11 +12,13 @@ use Illuminate\Support\Carbon;
  * @property string      $name
  * @property string      $email
  * @property string      $password
- * @property Carbon|null $email_verified_at
  * @property bool        $is_active
- * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ *
+ * @method static UserBuilder query()
+ * @method UserBuilder newQuery()
+ * @mixin UserBuilder
  */
 
 final class UserModel extends Authenticatable
@@ -43,6 +44,10 @@ final class UserModel extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'is_active' => 'boolean',
-        'password' => PasswordCast::class
     ];
+
+    public function newEloquentBuilder($query): UserBuilder
+    {
+        return new UserBuilder($query);
+    }
 }

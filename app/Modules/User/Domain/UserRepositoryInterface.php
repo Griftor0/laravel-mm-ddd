@@ -3,17 +3,24 @@ declare(strict_types=1);
 
 namespace App\Modules\User\Domain;
 
+use App\Modules\User\Application\UserCriteria;
+use App\Modules\User\Domain\Exceptions\UserAlreadyExistsException;
+use App\Modules\User\Domain\ValueObjects\Email;
+use App\Shared\Domain\Exceptions\EntityNotFoundException;
+
 interface UserRepositoryInterface
 {
-    public function getAll(
-        ?bool $isActive = null,
-        ?int  $page     = null,
-        ?int  $perPage  = null
-    ): ?array;
+    public function getAll(UserCriteria $criteria): array;
+    /**
+     * @throws EntityNotFoundException
+     */
     public function getById(int $id): ?User;
-    public function getByEmail(string $email): ?User;
-    public function store(User $user, string $password): User;
-    public function update(User $user, ?string $password = null): void;
-    public function delete(string $id): void;
-
+    /**
+     * @throws UserAlreadyExistsException
+     */
+    public function save(User $user): User;
+    /**
+     * @throws EntityNotFoundException
+     */
+    public function deleteById(int $id): void;
 }

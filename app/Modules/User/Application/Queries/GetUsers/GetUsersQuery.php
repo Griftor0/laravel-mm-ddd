@@ -6,8 +6,8 @@ namespace App\Modules\User\Application\Queries\GetUsers;
 final readonly class GetUsersQuery
 {
     public function __construct(
-        public ?bool $isActive = null,
-        public ?int  $page     = null,
-        public ?int  $perPage  = null,
+        public ?bool $isActive   = null,
+        public ?int  $pageNumber = null,
+        public ?int  $perPage    = null,
     ) {}
 }
