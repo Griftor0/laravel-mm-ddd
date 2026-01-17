@@ -1,5 +1,6 @@
 <?php
 
 return [
-    \App\Core\Infrastructure\Providers\AppServiceProvider::class,
+    \App\Core\Infrastructure\AppServiceProvider::class,
+    \App\Modules\User\Infrastructure\Laravel\UserServiceProvider::class,
 ];
