@@ -1,30 +1,33 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\User\Application\Commands\CreateUser;
+namespace App\Modules\Auth\Application\Commands\RegisterUser;
 
+use App\Modules\Auth\Domain\AuthenticatedUser;
 use App\Modules\User\Application\Repositories\UserRepositoryInterface;
 use App\Modules\User\Application\Services\PasswordService;
 use App\Modules\User\Domain\User;
 use App\Modules\User\Domain\ValueObjects\Email;
 
-final readonly class CreateUserHandler
+final readonly class RegisterUserHandler
 {
     public function __construct(
         private UserRepositoryInterface $users,
-        private PasswordService         $passwordService,
+        private PasswordService         $password,
     ) {}
 
-    public function handle(CreateUserCommand $command): User
+    public function handle(RegisterUserCommand $command): AuthenticatedUser
     {
         $user = new User(
             id:       null,
             name:     $command->name,
             email:    new Email($command->email),
-            password: $this->passwordService->create($command->password),
-            isActive: $command->isActive
+            password: $this->password->fromPlain($command->password),
+            isActive: true
         );
 
-        return $this->users->save($user);
+        $user = $this->users->save($user);
+
+        return new AuthenticatedUser($user, $token);
     }
 }

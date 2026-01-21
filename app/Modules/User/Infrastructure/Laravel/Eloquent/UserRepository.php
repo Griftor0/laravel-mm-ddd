@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace App\Modules\User\Infrastructure\Laravel\Eloquent;
 
-use App\Modules\User\Application\UserCriteria;
+use App\Modules\User\Application\Queries\Filters\UserCriteria;
+use App\Modules\User\Application\Repositories\UserRepositoryInterface;
 use App\Modules\User\Domain\Exceptions\UserAlreadyExistsException;
 use App\Modules\User\Domain\User;
-use App\Modules\User\Domain\UserRepositoryInterface;
-use App\Shared\Domain\Exceptions\EntityNotFoundException;
+use App\Shared\Application\EntityNotFoundException;
 use Illuminate\Database\QueryException;
 
 final class UserRepository implements UserRepositoryInterface

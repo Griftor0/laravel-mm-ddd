@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Modules\User\Application\Queries\GetUsers;
 
-use App\Modules\User\Application\UserCriteria;
-use App\Modules\User\Domain\UserRepositoryInterface;
+use App\Modules\User\Application\Queries\Filters\UserCriteria;
+use App\Modules\User\Application\Repositories\UserRepositoryInterface;
 use App\Shared\Domain\ValueObjects\Pagination;
 
 final readonly class GetUsersHandler

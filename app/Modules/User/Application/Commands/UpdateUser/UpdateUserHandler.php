@@ -3,17 +3,16 @@ declare(strict_types=1);
 
 namespace App\Modules\User\Application\Commands\UpdateUser;
 
-use App\Modules\User\Application\PasswordFactory;
+use App\Modules\User\Application\Repositories\UserRepositoryInterface;
+use App\Modules\User\Application\Services\PasswordService;
 use App\Modules\User\Domain\User;
-use App\Modules\User\Domain\UserRepositoryInterface;
 use App\Modules\User\Domain\ValueObjects\Email;
-use App\Shared\Domain\Exceptions\EntityNotFoundException;
 
 final readonly class UpdateUserHandler
 {
     public function __construct(
         private UserRepositoryInterface $users,
-        private PasswordFactory $password,
+        private PasswordService         $passwordService,
     ) {}
 
     public function handle(UpdateUserCommand $command): User
@@ -49,7 +48,8 @@ final readonly class UpdateUserHandler
         }
 
         if ($command->password !== null) {
-            $user->changePassword($this->password->fromPlain($command->password));
+            $newPassword = $this->passwordService->create($command->password);
+            $user->changePassword($newPassword);
             $isChanged = true;
         }
 

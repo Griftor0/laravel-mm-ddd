@@ -5,9 +5,8 @@ namespace App\Modules\User\Domain;
 
 use App\Modules\User\Domain\ValueObjects\Email;
 use App\Modules\User\Domain\ValueObjects\Password;
-use App\Shared\Domain\Entity;
 
-final class User extends Entity
+final class User
 {
     public function __construct(
         private readonly ?int $id,
@@ -27,14 +26,4 @@ final class User extends Entity
     public function activate(): void { $this->isActive = true; }
     public function deactivate(): void { $this->isActive = false; }
     public function changePassword(Password $password): void { $this->password = $password; }
-
-    public function toArray(): array
-    {
-        return [
-            'id'            => $this->getId(),
-            'name'          => $this->getName(),
-            'email'         => $this->getEmail()->value(),
-            'isActive'      => $this->isActive(),
-        ];
-    }
 }

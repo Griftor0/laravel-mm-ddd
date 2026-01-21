@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Modules\User\Infrastructure\Laravel;
 
-use App\Modules\User\Domain\UserRepositoryInterface;
+use App\Modules\User\Application\Repositories\UserRepositoryInterface;
 use App\Modules\User\Infrastructure\Laravel\Eloquent\UserRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,7 +14,7 @@ final class UserServiceProvider extends ServiceProvider
         $modulePath = base_path('app/Modules/User');
 
         $this->loadMigrationsFrom($modulePath . '/Infrastructure/Laravel/Migrations');
-        $this->loadRoutesFrom($modulePath . '/Presentation/Laravel/Api/routes.php');
+        $this->loadRoutesFrom($modulePath . '/Presentation/Api/Laravel/routes.php');
     }
 
     public function register(): void

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Core\Infrastructure;
 
-use App\Shared\Domain\HasherInterface;
+use App\Shared\Application\HasherInterface;
 use App\Shared\Infrastructure\Laravel\Services\Hasher;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\ServiceProvider;

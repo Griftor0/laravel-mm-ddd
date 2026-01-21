@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\Laravel\Services;
 
-use App\Shared\Domain\HasherInterface;
+use App\Shared\Application\HasherInterface;
 use Illuminate\Support\Facades\Hash;
 
 final class Hasher implements HasherInterface
